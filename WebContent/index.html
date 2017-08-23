@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html ng-app="snippets">
+<head>
+	<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.7/angular.js"></script>
+    <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.7/angular-route.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.7/angular-cookies.js"></script>
+    
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u"
+        crossorigin="anonymous">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp"
+        crossorigin="anonymous">
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa"
+        crossorigin="anonymous"></script>
+
+<title>Snippets</title>
+</head>
+<body>
+
+	<nav class="navbar navbar-inverse" ng-controller="navbarController as ctrl">
+        <div class="container-fluid">
+            <div class="navbar-header">
+                <a href="#/" class="navbar-brand" > Snippets </a>
+            </div>
+            <ul class="nav navbar-nav">
+                <li><a href="#/add_snippet"><span class="glyphicon glyphicon-plus" ></span>add </a></li>
+            </ul>
+            <ul class="nav navbar-nav navbar-right">
+            	<li ><a href="#/login" ng-show="role=='user'"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
+            	<li ><a href="#/register" ng-show="role=='user'" >Register</a></li>
+            	<li ><a href="#/" ng-show="role=='ruser' || role=='admin'">Profile</a></li>
+                <li ><a href="#/" ng-show="role=='ruser' || role=='admin'" ng-click="ctrl.logout()"><span class="glyphicon glyphicon-log-out"></span> Logout</a></li>
+            </ul>
+        </div>
+    </nav>
+	
+	<ng-view></ng-view>
+
+	<!-- app -->
+	<script src="app/app.js"></script>
+
+	<!-- services -->
+	<script src="app/permissionService.js"></script>
+	<script src="app/authService.js"></script>
+	<script src="app/services/userService.js"></script>
+
+	<!-- controllers -->
+	<script src="app/controllers/navbarController.js"></script>
+	<script src="app/controllers/loginController.js"></script>
+    <script src="app/controllers/registerController.js"></script>
+</body>
+</html>

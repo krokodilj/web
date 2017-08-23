@@ -43,7 +43,7 @@ public class UserDAO {
 	
 	public boolean register(User usr){
 		try{
-			usr.setRole("usr");
+			usr.setRole("ruser");
 			usr.setBlocked(false);
 			users.data.put(usr.getUsername(), usr);
 			saveData();

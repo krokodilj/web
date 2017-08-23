@@ -28,19 +28,21 @@ public class UserService {
 	@GET
 	@Path("/check/{username}")
 	public Response checkUsername(@PathParam("username") String username){
-		String res="taken";
+		
 		if(dao.isUsernameOk(username)){
-			res="available";
+			return Response.ok().build();
 		}
-		return Response.ok().entity(res).build();
+		return Response.status(Response.Status.CONFLICT).build();
 	}
 	
 	@POST
 	@Path("/register")
 	@Consumes(MediaType.APPLICATION_JSON)
 	public Response register(User usr){	
-		dao.register(usr);
-		return Response.ok().build();
+		if(dao.register(usr)){
+			return Response.ok().build();
+		}
+		return Response.status(Response.Status.INTERNAL_SERVER_ERROR).build();
 	}
 	
 	@POST
