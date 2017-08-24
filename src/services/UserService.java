@@ -58,5 +58,18 @@ public class UserService {
 		}
 		return Response.status(401).build();
 	}
+	
+	@GET
+	@Path("/{username}")
+	@Produces(MediaType.APPLICATION_JSON)
+	public Response getUser(@PathParam("username") String username){
+		
+		//check for token
+		if(!dao.isUsernameOk(username)){
+			User u=dao.getUser(username);
+			return Response.ok().entity(u).build();
+		}
+		return Response.status(Response.Status.NOT_FOUND).build();
+	}
 		
 }

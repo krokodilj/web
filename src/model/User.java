@@ -18,6 +18,21 @@ public class User {
 		
 	}
 
+	public User(String username, String password, String email, String role, String fname, String lname, String address,
+			String phone, boolean blocked, String img_src) {
+		super();
+		this.username = username;
+		this.password = password;
+		this.email = email;
+		this.role = role;
+		this.fname = fname;
+		this.lname = lname;
+		this.address = address;
+		this.phone = phone;
+		this.blocked = blocked;
+		this.img_src = img_src;
+	}
+
 	public String getUsername() {
 		return username;
 	}
@@ -98,6 +113,11 @@ public class User {
 		this.img_src = img_src;
 	}
 
+	public User copy(){
+		return new User(this.username,this.password,this.email,this.role,this.fname,
+				this.lname,this.address,this.phone,this.blocked,this.img_src);
+	}
+	
 	@Override
 	public String toString() {
 		return "User [username=" + username + ", password=" + password + ", email=" + email + ", fname=" + fname

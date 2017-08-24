@@ -57,7 +57,7 @@ public class UserDAO {
 	public boolean loginCheck(String usrname, String pass){
 		try{
 			if(! isUsernameOk(usrname))
-			if(users.data.get(usrname).getPassword().equals(pass))return true;			
+			if(users.data.get(usrname).getPassword().equals(pass))return true;	
 			return false;
 		}catch(Exception e){
 			e.printStackTrace();
@@ -71,6 +71,12 @@ public class UserDAO {
 		token.put("name", username);
 		token.put("role", users.data.get(username).getRole());
 		return token;
+	}
+	
+	public User getUser(String username){
+		User u = users.data.get(username).copy();	
+		u.setPassword(null);
+		return u;
 	}
 	
 	private void saveData(){
