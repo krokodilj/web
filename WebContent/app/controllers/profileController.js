@@ -1,11 +1,13 @@
 ( function (){
 	angular.module("snippets")
-		.controller("profileController",function($routeParams,userService,snippetService){
+		.controller("profileController",function($routeParams,userService,snippetService,languageService){
 
 			var self = this
 
 			self.user
 			self.snippets
+			self.languages
+			self.language
 
 			self.getUser=function(){
 
@@ -19,6 +21,19 @@
 				snippetService.getByOwner($routeParams.username).then(function(retval){
 					self.snippets=retval
 					
+				})
+			}
+
+			self.getLanguages=function(){
+				languageService.getLanguages().then(function(retval){
+					self.languages=retval
+				})
+			}
+
+			self.addLanguage=function(){
+				languageService.addLanguage(self.language).then(function(retval){
+					if(!retval){	self.error=true	}
+					else{	self.getLanguages()	}
 				})
 			}
 			

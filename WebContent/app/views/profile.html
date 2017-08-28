@@ -11,7 +11,7 @@
 			<div class="tab-container">
     			<ul class="nav nav-tabs">
       				<li class="active"><a data-target="#mysnippets" data-toggle="tab">snippets</a></li>
-				    <li><a data-target="#languages" data-toggle="tab" ng-show="role=='admin'">languages</a></li>
+				    <li><a data-target="#languages" data-toggle="tab" ng-show="role=='admin'" ng-click="ctrl.getLanguages()">languages</a></li>
 				    <li><a data-target="#numbers" data-toggle="tab" ng-show="role=='admin'">stuff</a></li>
 				</ul>
 				<div class="tab-content">
@@ -38,7 +38,18 @@
 
 					<!-- languages -->
 				    <div class="tab-pane cont" id="languages">
-				    	all languages and button to add a new one..
+				    	<ul class="list-group">
+				    		<li class="list-group-item" ng-repeat="l in ctrl.languages">{{l}}</li>
+				    	</ul>
+				    	<form name="addlangForm">
+				    		<div class="form-group">
+								<center><label for="lan">Add language:</label><center>
+							<input id="lan" type="text" class="form-control" ng-model="ctrl.language" required>
+							<button class="btn btn-success" ng-disabled="registerForm.$invalid" ng-click="ctrl.addLanguage()">Submit</button>
+					
+						</center>
+					</div>
+
 				    </div>
 
 				    <!-- numbers -->
