@@ -13,8 +13,8 @@
 						controller:"loginController",
 						controllerAs:"ctrl",
 						resolve:{
-							"permission":function(permissions){
-								permissions.givePermission(['user']);
+							"permission":function(permissionService){
+								permissionService.givePermission(['user']);
 							}
 						}
 					})
@@ -23,14 +23,31 @@
 						controller:"registerController",
 						controllerAs:"ctrl",
 						resolve:{
-							"permission":function(permissions){
-								permissions.givePermission(['user']);
+							"permission":function(permissionService){
+								permissionService.givePermission(['user']);
 							}
 						}
 					})
 					.when("/add_snippet",{
+						templateUrl:"app/views/add_snippet.html",
+						controller:"addSnippetController",
+						controllerAs:"ctrl",
+						resolve:{
+							"permission":function(permissionService){
+								permissionService.givePermission(['user','ruser','admin']);
+							}
+						}
 
-
+					})
+					.when("/profile/:username",{
+						templateUrl:"app/views/profile.html",
+						controller:"profileController",
+						controllerAs:"ctrl",
+						resolve:{
+							"permission":function(permissionService){
+								permissionService.givePermission(["ruser","admin"])
+							}
+						}
 					})
 					.otherwise({
 						redirectTo:"/"

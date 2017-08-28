@@ -1,7 +1,7 @@
 (function () {
 
 	angular.module("snippets")
-		.service("permissions",function($window,$rootScope){
+		.service("permissionService",function($window,$rootScope){
 
 			var self = this
 

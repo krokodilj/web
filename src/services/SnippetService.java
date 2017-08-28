@@ -3,6 +3,7 @@ package services;
 import java.util.List;
 
 import javax.ws.rs.Consumes;
+import javax.ws.rs.DELETE;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
 import javax.ws.rs.Path;
@@ -54,6 +55,17 @@ public class SnippetService {
 		
 		return Response.ok().entity(s).build();
 		
+	}
+	
+	@DELETE
+	@Path("/{id}")
+	public Response deleteSnippet(@PathParam("id") String id){
+		//token 
+		
+		if(dao.deleteSnippet(id)){
+			return Response.ok().build();
+		}
+		return Response.status(Response.Status.CONFLICT).build();
 	}
 	
 	@GET

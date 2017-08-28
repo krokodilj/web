@@ -25,10 +25,10 @@
             <ul class="nav navbar-nav">
                 <li><a href="#/add_snippet"><span class="glyphicon glyphicon-plus" ></span>add </a></li>
             </ul>
-            <ul class="nav navbar-nav navbar-right">
+            <ul class="nav navbar-nav navbar-right">            	
             	<li ><a href="#/login" ng-show="role=='user'"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
             	<li ><a href="#/register" ng-show="role=='user'" >Register</a></li>
-            	<li ><a href="#/" ng-show="role=='ruser' || role=='admin'">Profile</a></li>
+            	<li ><a href="#/profile/{{name}}" ng-show="role=='ruser' || role=='admin'">Profile</a></li>
                 <li ><a href="#/" ng-show="role=='ruser' || role=='admin'" ng-click="ctrl.logout()"><span class="glyphicon glyphicon-log-out"></span> Logout</a></li>
             </ul>
         </div>
@@ -43,10 +43,14 @@
 	<script src="app/permissionService.js"></script>
 	<script src="app/authService.js"></script>
 	<script src="app/services/userService.js"></script>
-
+	<script src="app/services/snippetService.js"></script>
+    <script src="app/services/languageService.js"></script>
+	
 	<!-- controllers -->
 	<script src="app/controllers/navbarController.js"></script>
 	<script src="app/controllers/loginController.js"></script>
     <script src="app/controllers/registerController.js"></script>
+    <script src="app/controllers/profileController.js"></script>
+    <script src="app/controllers/addSnippetController.js"></script>
 </body>
 </html>

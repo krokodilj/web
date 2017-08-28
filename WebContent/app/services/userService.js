@@ -37,6 +37,16 @@
 				
 			}
 
+			self.getUser=function(username){
+				var ret = $http.get('api/users/'+username).then(
+				function(response){
+					return response.data
+				},function(error){
+					return undefined
+				});
+				return ret;
+			}
+
 			self.block=function(){
 
 			}

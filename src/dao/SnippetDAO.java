@@ -84,6 +84,16 @@ public class SnippetDAO {
 		return false;
 	}
 	
+	public boolean deleteSnippet(String id){
+		if(!snippets.data.containsKey(id)) return false;
+		
+		snippets.data.remove(id);
+		
+		saveData();
+		
+		return true;		
+	}
+	
 	private void saveData(){
 		try {
 			mapper.writeValue(file, snippets);

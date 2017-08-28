@@ -1,0 +1,53 @@
+<div class='container-fluid'>
+	<div class="row">
+		<div class="col-md-2"></div>
+		<div class="col-md-3">
+			<img src="{{ctrl.user.img_src}}" width="200px" height="200px">
+			<h3>{{ctrl.user.username}}</h3>
+			<h5>{{ctrl.user.email}}</h5>
+		</div>
+		<div class="col-md-5">
+
+			<div class="tab-container">
+    			<ul class="nav nav-tabs">
+      				<li class="active"><a data-target="#mysnippets" data-toggle="tab">snippets</a></li>
+				    <li><a data-target="#languages" data-toggle="tab" ng-show="role=='admin'">languages</a></li>
+				    <li><a data-target="#numbers" data-toggle="tab" ng-show="role=='admin'">stuff</a></li>
+				</ul>
+				<div class="tab-content">
+
+					<!-- my snippets -->
+					<div class="tab-pane active cont" id="mysnippets">
+						<a  href="#/add_snippet" class="btn btn-block btn-primary" ng-show="name==ctrl.user.username">create new snippet</a>
+						<div>
+							<p ng-show="ctrl.snippets.length==0">no snippets here...</p>
+							<ul class="list-group">
+								<div ng-repeat="c in ctrl.snippets">
+								<li class="list-group-item clearfix" >
+									<a href="#/snippet/{{c.id}}">{{c.desc}}</a>									
+									<span class="pull-right button-group">
+										<span class="badge">{{c.language}}</span>
+										<button class="glyphicon glyphicon-remove" ng-show='name==ctrl.user.username' ng-click="ctrl.remove(c.id)"></button>
+									</span>
+								</li>
+								
+								</div>
+							</ul>
+						</div>
+					</div>
+
+					<!-- languages -->
+				    <div class="tab-pane cont" id="languages">
+				    	all languages and button to add a new one..
+				    </div>
+
+				    <!-- numbers -->
+				    <div class="tab-pane cont" id="numbers">
+				    	some unrelated admin stuff here
+				    </div>
+				</div>
+			</div>
+		</div>
+		<div class="col-md-2"></div>
+	</div>
+</div>

@@ -1,0 +1,36 @@
+<div class="container-fluid">
+	<div class="row">
+		<div class="col-md-3"></div>
+		<div class="col-md-6">
+			<form name="loginForm">
+			    <center><h1>Create new snippet</h1></center>
+			    <div class="form-group">
+			        <center><label for="desc">Description:</label><center>
+			        <input id="desc" type="text" class="form-control" ng-model="ctrl.desc" required>
+			    </div>
+			    <div class="form-group" >
+			    	<center><label for="language">Language:</label></center>			    	
+			    	<div class="btn-group" ng-repeat="c in ctrl.languages">
+					    <a href="javascript:void(0)" ng-click="ctrl.language = c" ng-class="{ 'active' : ctrl.language == c }" class="btn">{{c}}</a>
+					</div>
+			    </div>
+			    <div class="form-group">
+			        <center><label for="code">Code:</label><center>
+			        <textarea style="resize :none ; height:400px; y-overflow:false;" class="form-control" id="code" ng-model="ctrl.code" required></textarea>
+			    </div>
+			    <div class="form-group">
+			        <center><label for="url">Url:</label><center>
+			        <input class="form-control" id="url" ng-model="ctrl.url" required>
+			    </div>
+			    <div class="form-group">
+			        <center><label for="min">Number:</label><center>
+			        <input class="form-control" type="number" id="min" ng-model="ctrl.minutes" required>
+			    </div>
+			    
+			    <center><p ng-show="ctrl.error">create error</p></center>
+			    <center><button class="btn btn-success" ng-disabled="loginForm.$invalid" ng-click="ctrl.create()">Create</button></center>
+    		</form>
+		</div>
+		<div class="col-md-3"></div>
+	</div>
+</div>
