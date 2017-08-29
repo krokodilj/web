@@ -1,0 +1,37 @@
+<div class="container-fluid">
+	<div class="row">
+		<div class="col-md-2"></div>
+		<div class="col-md-3">
+			<!-- details-->
+			<h2>Details</h2>
+			<hr>
+			<span class="badge">{{ctrl.snippet.language}}</span>
+			<center>Description</center>
+			<div style="height:150px;">  {{ctrl.snippet.desc}}</div>
+			Url: <a  target="_blank" href="http://{{ctrl.snippet.url}}">{{ctrl.snippet.url}}</a>
+			<p>Owner:  {{ctrl.snippet.owner}}</p>
+			<button class="btn btn-success"  ng-click="ctrl.lockSnippet()" ng-show="role=='admin' && !ctrl.snippet.locked" >LOCK</button>			
+			<button class="btn btn-success"  ng-click="ctrl.unlockSnippet()" ng-show="role=='admin' && ctrl.snippet.locked" >UNLOCK</button>
+			<span class="badge" ng-show="ctrl.snippet.locked">LOCKED</span>
+		</div>
+
+		<div class="col-md-5">
+			<!-- code-->
+			<p >Code:</p>
+			<textarea ng-model="ctrl.snippet.code" style="resize :none ; width:100% ;height:400px; y-overflow:false;" id="txt" disabled="" ></textarea>
+			
+			<!-- comments-->
+			<div>
+				<center>Comments</center>
+				<textarea  style="width:80%; height: 100px;resize :none ;y-overflow:false;" ng-model="ctrl.text"></textarea>
+				<button class="btn btn-success" ng-click="ctrl.addComment()" ng-disabled="ctrl.snippet.locked">Comment</button>
+				<div ng-repeat="c in ctrl.snippet.comments">
+				{{c.text}}
+				</div>
+			</div>
+		</div>
+
+		
+		<div class="col-md-2"></div>
+	</div>
+</div>

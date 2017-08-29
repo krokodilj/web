@@ -49,6 +49,16 @@
 							}
 						}
 					})
+					.when('/snippet/:id',{
+						templateUrl:"app/views/snippet.html",
+						controller:"snippetController",
+						controllerAs:"ctrl",
+						resolve:{
+							"permission":function(permissionService){
+								permissionService.givePermission(['user','ruser','admin']);
+							}
+						}
+					})
 					.otherwise({
 						redirectTo:"/"
 					})

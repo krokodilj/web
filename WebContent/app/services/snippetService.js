@@ -62,5 +62,27 @@
 				return ret
 			}
 
+			self.lockSnippet=function(id){
+				var ret = $http.put("api/snippets/"+id).then(
+				function(response){
+					return true
+				},function(error){
+					return false
+				})
+
+				return ret
+			}
+
+			self.unlockSnippet=function(id){
+				var ret = $http.put("api/snippets/"+id).then(
+				function(response){
+					return true
+				},function(error){
+					return false
+				})
+
+				return ret
+			}
+
 		})
 })();

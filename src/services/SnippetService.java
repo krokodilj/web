@@ -6,6 +6,7 @@ import javax.ws.rs.Consumes;
 import javax.ws.rs.DELETE;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
+import javax.ws.rs.PUT;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
@@ -13,6 +14,7 @@ import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
 import dao.SnippetDAO;
+import model.Comment;
 import model.Snippet;
 
 @Path("/snippets")
@@ -27,7 +29,6 @@ public class SnippetService {
 	public Response addSnippet(Snippet s){
 		
 		String id=dao.addSnippet(s);
-		System.out.println(id.length());
 		if(id.length()==33){
 		
 			return Response.ok().entity(id).build();
@@ -68,6 +69,17 @@ public class SnippetService {
 		return Response.status(Response.Status.CONFLICT).build();
 	}
 	
+	@PUT
+	@Path("/{id}")
+	public Response lockSnippet(@PathParam("id") String id){
+		if(dao.lockSnippet(id))return Response.ok().build();
+		
+		return Response.status(Response.Status.CONFLICT).build();
+	}
+	
+	
+	
+	
 	@GET
 	@Path("/languages")
 	@Produces(MediaType.APPLICATION_JSON)
@@ -86,5 +98,27 @@ public class SnippetService {
 		
 		return Response.status(Response.Status.CONFLICT).build();
 	}
+
+	@POST
+	@Path("/{snippet_id}/comment")
+	@Consumes(MediaType.APPLICATION_JSON)
+	public Response addComment(@PathParam("snippet_id") String snippetId,Comment c){
+		
+		if(dao.addComment(snippetId,c)){
+			return Response.ok().build();
+		}
+		return Response.status(Response.Status.CONFLICT).build();
+	}
 	
+	@DELETE
+	@Path("/{snippet_id}/comment/{comment_id}")
+	public Response deleteComment(@PathParam("snippet_id") String snippetId,@PathParam("comment_id") String commentId){
+		
+		//proveri token
+		
+		if(dao.deleteComment(snippetId, commentId))
+			return Response.ok().build();
+		
+		return Response.status(Response.Status.CONFLICT).build();
+	}
 }

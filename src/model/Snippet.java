@@ -14,13 +14,14 @@ public class Snippet {
 	private Date date;
 	private long minutes;
 	private List<Comment> comments;
+	private boolean locked ;
 	
 	public Snippet(){
 		
 	}
 
 	public Snippet(String id,String owner, String desc, String code, String language, String url,
-			Date date, long minutes,	List<Comment> comments) {
+			Date date, long minutes,	List<Comment> comments,boolean locked) {
 		super();
 		this.id=id;
 		this.owner = owner;
@@ -31,6 +32,7 @@ public class Snippet {
 		this.date=date;
 		this.minutes = minutes;
 		this.comments = comments;
+		this.locked=locked;
 	}
 
 	public String getOwner() {
@@ -107,7 +109,15 @@ public class Snippet {
 	
 	public Snippet copy(){
 		return new Snippet(this.id,this.owner,this.desc,this.code,this.language,this.url,this.date,this.minutes,
-		this.comments);
+		this.comments,this.locked);
+	}
+
+	public boolean isLocked() {
+		return locked;
+	}
+
+	public void setLocked(boolean locked) {
+		this.locked = locked;
 	}
 	
 }
