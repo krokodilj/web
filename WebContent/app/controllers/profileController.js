@@ -48,6 +48,13 @@
 				})
 			}
 
+			self.blockUser=function(){
+				userService.blockUser(self.user.username).then(function(retval){
+					if(!retval) {alert("block user ERROR")}
+					else{self.getUser()}
+				})
+			}
+
 			self.getUser();
 
 			self.getSnippets();

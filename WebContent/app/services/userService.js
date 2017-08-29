@@ -47,8 +47,14 @@
 				return ret;
 			}
 
-			self.block=function(){
-
+			self.blockUser=function(username){
+				var ret=$http.put("api/users/block/"+username).then(
+				function(response){
+					return true;
+				},function(error){
+					return false;
+				})
+				return ret
 			}
 
 

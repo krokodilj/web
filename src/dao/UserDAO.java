@@ -57,7 +57,8 @@ public class UserDAO {
 	public boolean loginCheck(String usrname, String pass){
 		try{
 			if(! isUsernameOk(usrname))
-			if(users.data.get(usrname).getPassword().equals(pass))return true;	
+			if(users.data.get(usrname).getPassword().equals(pass))
+			if(!users.data.get(usrname).isBlocked())return true;	
 			return false;
 		}catch(Exception e){
 			e.printStackTrace();
@@ -77,6 +78,16 @@ public class UserDAO {
 		User u = users.data.get(username).copy();	
 		u.setPassword(null);
 		return u;
+	}
+	
+	public boolean blockUser(String id){
+		if(!users.data.containsKey(id)) return false;
+		
+		users.data.get(id).setBlocked(true);
+		
+		saveData();
+		
+		return true;
 	}
 	
 	private void saveData(){

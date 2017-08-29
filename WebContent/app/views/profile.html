@@ -5,14 +5,17 @@
 			<img src="{{ctrl.user.img_src}}" width="200px" height="200px">
 			<h3>{{ctrl.user.username}}</h3>
 			<h5>{{ctrl.user.email}}</h5>
+			<button class="btn btn-success"  ng-click="ctrl.blockUser()" ng-show="role=='admin' && !ctrl.user.blocked && ctrl.user.role!='admin'" >BLOCK</button>
+			<span class="badge" ng-show="ctrl.user.blocked">BLOCKED</span>
+					
 		</div>
 		<div class="col-md-5">
 
 			<div class="tab-container">
     			<ul class="nav nav-tabs">
       				<li class="active"><a data-target="#mysnippets" data-toggle="tab">snippets</a></li>
-				    <li><a data-target="#languages" data-toggle="tab" ng-show="role=='admin'" ng-click="ctrl.getLanguages()">languages</a></li>
-				    <li><a data-target="#numbers" data-toggle="tab" ng-show="role=='admin'">stuff</a></li>
+				    <li><a data-target="#languages" data-toggle="tab" ng-show="role=='admin' && name==ctrl.user.username" ng-click="ctrl.getLanguages()">languages</a></li>
+				    <li><a data-target="#numbers" data-toggle="tab" ng-show="role=='admin'  && name==ctrl.user.username">stuff</a></li>
 				</ul>
 				<div class="tab-content">
 
