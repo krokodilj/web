@@ -8,6 +8,7 @@ import java.util.List;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 import model.Comment;
+import model.Grade;
 import model.Snippet;
 import model.Snippets;
 import util.IdentificatorGenerator;
@@ -103,6 +104,7 @@ public class SnippetDAO {
 		String id=IdentificatorGenerator.generateId();
 		c.setId(id);
 		c.setDate(new Date());
+		c.setGrade(new Grade());
 		s.getComments().add(c);
 		
 		saveData();
@@ -136,7 +138,30 @@ public class SnippetDAO {
 		
 		return true;
 	}
-	
+	public boolean addGrade(String snippetId,String commentId,String userId,boolean grade){
+		if(!snippets.data.containsKey(snippetId)) return false;
+		
+		Snippet s=snippets.data.get(snippetId);
+		
+		int ind=-1;
+		
+		for(int i=0;i<s.getComments().size();i++){
+			if(s.getComments().get(i).getId().equals(commentId)) {
+				ind=i;
+				
+			}
+		}
+		if(ind==-1) return false;
+		
+		
+		//sad dodaj ocenu
+		s.getComments().get(ind).getGrade().raise(grade);
+		s.getComments().get(ind).getGrade().getUsers().add(userId);
+		
+		saveData();
+		
+		return true;
+	}
 	
 	private void saveData(){
 		try {

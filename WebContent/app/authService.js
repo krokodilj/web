@@ -47,7 +47,7 @@
 
 			self.getUserName=function(){
 				var token = $cookies.getObject('token')
-				if(!token) return '';
+				if(!token) return 'guest';
 				return token.name;
 			}
 

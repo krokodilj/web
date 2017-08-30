@@ -13,6 +13,8 @@ import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
+import org.json.simple.JSONObject;
+
 import dao.SnippetDAO;
 import model.Comment;
 import model.Snippet;
@@ -92,7 +94,6 @@ public class SnippetService {
 	@POST
 	@Path("/languages")
 	public Response addLanguage(String l){
-		System.out.println(l);
 		
 		if(dao.addLanguage(l))	return Response.ok().build();
 		
@@ -121,4 +122,21 @@ public class SnippetService {
 		
 		return Response.status(Response.Status.CONFLICT).build();
 	}
+	
+	@POST
+	@Path("/{snippet_id}/comment/{comment_id}/grade")
+	@Consumes(MediaType.APPLICATION_JSON)
+	public Response addGrade(
+			@PathParam("snippet_id") String snippetId,
+			@PathParam("comment_id") String commentId,
+			JSONObject data){
+		
+		if(dao.addGrade(snippetId,commentId,(String)data.get("user"),(boolean) data.get("grade"))){
+			return Response.ok().build();
+		}
+		
+		return Response.status(Response.Status.CONFLICT).build();
+		
+	}
+	
 }

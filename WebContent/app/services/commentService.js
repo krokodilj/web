@@ -23,6 +23,33 @@
 
 			self.deleteComment=function(snippet_id,id){
 
+				var ret = $http.delete('api/snippets/'+snippet_id+'/comment/'+id).then(
+					function(response){
+						return true
+					},function(error){
+						return false
+					})
+
+				return ret
+
+			}
+
+			self.addGrade=function(snippet_id,comment_id,grade){
+				name=authService.getUserName();
+
+				data={
+					"user":name,
+					"grade":grade
+				}
+
+				var ret=$http.post('api/snippets/'+snippet_id+"/comment/"+comment_id+"/grade",data).then(
+					function(response){
+						return true
+					},function(error){
+						return false
+					})
+
+				return ret
 			}
 
 			

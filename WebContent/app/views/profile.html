@@ -25,12 +25,19 @@
 						<div>
 							<p ng-show="ctrl.snippets.length==0">no snippets here...</p>
 							<ul class="list-group">
+
+								<!-- snippet list -->
 								<div ng-repeat="c in ctrl.snippets">
 								<li class="list-group-item clearfix" >
 									<a href="#/snippet/{{c.id}}">{{c.desc}}</a>									
 									<span class="pull-right button-group">
 										<span class="badge">{{c.language}}</span>
-										<button class="glyphicon glyphicon-remove" ng-show='name==ctrl.user.username' ng-click="ctrl.remove(c.id)"></button>
+										<span 
+											style="cursor:pointer" 
+											class="glyphicon glyphicon-remove" 
+											ng-show='name==ctrl.user.username' 
+											ng-click="ctrl.remove(c.id)">
+										</span>
 									</span>
 								</li>
 								

@@ -7,21 +7,19 @@ public class Comment {
 	private String id;
 	private String owner;
 	private String text;
-	private long positive;
-	private long negative;
+	private Grade grade;
 	private Date date;
 	
 	public Comment(){
 		
 	}
 
-	public Comment(String id,String owner, String text, long positive, long negative,Date date) {
+	public Comment(String id,String owner, String text, Grade grade,Date date) {
 		super();
 		this.id=id;
 		this.owner = owner;
 		this.text = text;
-		this.positive = positive;
-		this.negative = negative;
+		this.grade = grade;
 	}
 
 	public String getOwner() {
@@ -40,20 +38,12 @@ public class Comment {
 		this.text = text;
 	}
 
-	public long getPositive() {
-		return positive;
+	public Grade getGrade() {
+		return grade;
 	}
 
-	public void setPositive(long positive) {
-		this.positive = positive;
-	}
-
-	public long getNegative() {
-		return negative;
-	}
-
-	public void setNegative(long negative) {
-		this.negative = negative;
+	public void setGrade(Grade grade) {
+		this.grade = grade;
 	}
 
 	public String getId() {

@@ -5,7 +5,8 @@
 
 			var self = this
 
-			self.snippet
+			self.snippet //has comment list and grades
+			self.text	
 
 			self.getSnippet=function(){
 				snippetService.getSnippet($routeParams.id).then(function(retval){
@@ -30,11 +31,25 @@
 			self.addComment=function(){
 				commentService.addComment($routeParams.id,self.text).then(function(retval){
 					if(!retval) { alert("unable to comment ERROR") }
-					else{ self.getSnippet()}
+					else{ self.text="";self.getSnippet()}
 				})
 			}
 
+			self.deleteComment=function(id){
+				if (confirm("Delete it????")){
+					commentService.deleteComment($routeParams.id,id).then(function(retval){
+						if(!retval) { alert("delete comment ERROR") }
+						else{ self.getSnippet()}
+					})
+				}
+			}
 
+			self.addGrade=function(comment_id,grade){//boolean je grade
+				commentService.addGrade($routeParams.id,comment_id,grade).then(function(retval){
+					if(!retval) { alert("add grade ERROR") }
+					else{ self.getSnippet()}
+				})
+			}
 
 			self.getSnippet()
 
