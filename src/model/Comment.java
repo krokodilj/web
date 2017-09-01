@@ -6,6 +6,7 @@ public class Comment {
 	
 	private String id;
 	private String owner;
+	private String owner_img;
 	private String text;
 	private Grade grade;
 	private Date date;
@@ -14,12 +15,21 @@ public class Comment {
 		
 	}
 
-	public Comment(String id,String owner, String text, Grade grade,Date date) {
+	public Comment(String id,String owner,String owner_img, String text, Grade grade,Date date) {
 		super();
 		this.id=id;
 		this.owner = owner;
+		this.owner_img = owner_img;
 		this.text = text;
 		this.grade = grade;
+	}
+
+	public String getOwner_img() {
+		return owner_img;
+	}
+
+	public void setOwner_img(String owner_img) {
+		this.owner_img = owner_img;
 	}
 
 	public String getOwner() {

@@ -1,6 +1,6 @@
 (function (){
 	angular.module("snippets")
-		.controller("registerController",function(userService,authService){
+		.controller("registerController",function($scope,userService,authService){
 
 			var self=this
 
@@ -16,11 +16,13 @@
 			self.phone
 			self.address
 
+			self.n="images/guest.png"
+
 			self.register = function(){
 
 
 				userService.register(self.username,self.password,self.email,
-									 self.firstname,self.lastname,self,
+									 self.firstname,self.lastname,
 									 self.phone,self.address)
 				.then(function(retval){
 				 	self.error=!retval;				 	
@@ -39,7 +41,28 @@
 				authService.login(self.username,self.password)
 			}
 
-		});
+			self.upload=function(){
+				userService.uploadImage(self.username,self.file).then(function(retval){
+					if(!retval){ alert("image upload ERROR")}
+					else { authService.login(self.username,self.password)	}
+				})							
+			}
 
+			$scope.readFile = function(input) {				
+               	self.input=input
+                var reader = new FileReader();
+
+	            reader.onload = function (e) {
+	                self.n=e.target.result	
+	                $scope.$apply()	                    
+	            }
+
+	            reader.readAsDataURL(input.files[0]);
+	            self.file = input.files[0]
+
+
+        	}
+
+		});
 
 })();

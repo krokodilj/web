@@ -61,10 +61,10 @@
 					<div class="row">
 						<div class="col-md-3">
 							<img
-								src="{{ctrl.user.img_src}}"
+								src="{{c.owner_img}}"
 								width="100px"
 								height="100px">
-							<a href="#/profile/{{c.owner}}" >{{c.owner=="guest" ? "" : c.owner}}</a>
+							<a href="#/profile/{{c.owner}}" >{{c.owner}}</a>
 						</div>
 						<div class="col-md-9">
 							<textarea
@@ -82,18 +82,18 @@
 								class="glyphicon glyphicon-plus" 
 								ng-click="ctrl.addGrade(c.id,true)" 
 								href="javascript.void(0)"
-								ng-show="!c.grade.users.includes(name)" >
+								ng-show="!c.grade.users.includes(name) && name!='guest'" >
 							</span>
-							<span ng-show="c.grade.users.includes(name)" class="glyphicon glyphicon-plus" ></span>
+							<span ng-show="c.grade.users.includes(name) || name=='guest'" class="glyphicon glyphicon-plus" ></span>
 							{{c.grade.negative}}
 							<span
 								style="cursor:pointer"
 								class="glyphicon glyphicon-minus" 
 								ng-click="ctrl.addGrade(c.id,false)" 
 								href="javascript.void(0)"
-								ng-show="!c.grade.users.includes(name)" >
+								ng-show="!c.grade.users.includes(name) && name!='guest'" >
 							</span>
-							<span ng-show="c.grade.users.includes(name)" class="glyphicon glyphicon-minus" ></span>
+							<span ng-show="c.grade.users.includes(name) || name=='guest'" class="glyphicon glyphicon-minus" ></span>
 						</div>
 						<div class="col-md-2">
 							<span
@@ -101,7 +101,7 @@
 								class="glyphicon glyphicon-remove" 
 								ng-click="ctrl.deleteComment(c.id)" 
 								href="javascript.void(0)"
-								ng-show="name==c.owner || role=='admin'" >
+								ng-show="(name==c.owner || role=='admin') && name!='guest'" >
 							</span>
 						</div>
 					</div>

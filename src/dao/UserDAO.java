@@ -1,6 +1,11 @@
 package dao;
 
 import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.OutputStream;
 
 import org.json.simple.JSONObject;
 
@@ -19,8 +24,6 @@ public class UserDAO {
 		
 		mapper= new ObjectMapper();
 		
-		File dir = new File("./data");
-		if (!dir.exists()) dir.mkdir();
 		
 		file = new File("./data/users.json");
 
@@ -45,6 +48,7 @@ public class UserDAO {
 		try{
 			usr.setRole("ruser");
 			usr.setBlocked(false);
+			usr.setImg_src("images/guest.png");
 			users.data.put(usr.getUsername(), usr);
 			saveData();
 			return true;
@@ -52,6 +56,45 @@ public class UserDAO {
 			e.printStackTrace();
 			return false;
 		}
+	}
+	
+	public boolean uploadPicture(String username,InputStream fis,String path){
+		try {			
+			System.out.println(path);
+            int read = 0;
+            byte[] bytes = new byte[1024];
+
+            OutputStream  outpuStream = new FileOutputStream(new File(path+File.separator+username+".png"));
+            while ((read = fis.read(bytes)) != -1) {
+                outpuStream.write(bytes, 0, read);
+            }
+
+            fis.close();
+            outpuStream.flush();
+            outpuStream.close();
+            
+            InputStream is=new FileInputStream(new File(path+File.separator+username+".png"));
+            
+            read = 0;
+            bytes = new byte[1024];
+
+            outpuStream = new FileOutputStream(new File("./data/images"+File.separator+username+".png"));
+            while ((read = is.read(bytes)) != -1) {
+                outpuStream.write(bytes, 0, read);
+            }
+            is.close();
+            outpuStream.flush();
+            outpuStream.close();
+            
+            
+        } catch (IOException e) {
+        	e.printStackTrace();
+        	return false;            
+        }
+		
+		users.data.get(username).setImg_src("images/"+username+".png");
+		saveData();
+		return true;
 	}
 	
 	public boolean loginCheck(String usrname, String pass){
@@ -71,6 +114,7 @@ public class UserDAO {
 		JSONObject token=new JSONObject();
 		token.put("name", username);
 		token.put("role", users.data.get(username).getRole());
+		token.put("img_src", users.data.get(username).getImg_src());
 		return token;
 	}
 	

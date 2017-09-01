@@ -10,31 +10,46 @@
 				data={
 					"username":un,
 					"password":ps,
-					"email":em
+					"email":em,
+					"fname":fn,
+					"lname":ln,
+					"phone":ph,
+					"address":ad
 				}
 				var ret= $http.post('api/users/register',data).then(
-				function(response){
-					return true
-				},function(error){					
-					return false
-				})
+					function(response){
+						return true
+					},function(error){					
+						return false
+					})
 				return ret
 			}
 
 			self.checkUsername=function(username){
 				
 				var ret= $http.get('api/users/check/'+username).then(
-				function(response){					
-					return true
-				},function(error){					
-					return false
-				});
+					function(response){					
+						return true
+					},function(error){					
+						return false
+					});
 				return ret		
 
 			}
 
-			self.uploadPicture=function(){
-				
+			self.uploadImage=function(username,file){
+			
+				data= new FormData()
+				data.append("username",username)
+				data.append("file",file)
+
+				var ret=$http.post('api/users/upload',data,{headers: {'Content-Type': undefined}}).then(
+					function(response){
+						return true
+					},function(error){					
+						return false
+					})
+				return ret
 			}
 
 			self.getUser=function(username){
@@ -49,11 +64,11 @@
 
 			self.blockUser=function(username){
 				var ret=$http.put("api/users/block/"+username).then(
-				function(response){
-					return true;
-				},function(error){
-					return false;
-				})
+					function(response){
+						return true;
+					},function(error){
+						return false;
+					})
 				return ret
 			}
 

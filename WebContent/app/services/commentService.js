@@ -6,9 +6,10 @@
 
 			self.addComment=function(snippet_id,text){
 				name=authService.getUserName()
-
+				owner_img=authService.getUserImgSrc()
 				data={
 					"owner":name,
+					"owner_img":owner_img,
 					"text":text					
 				}
 

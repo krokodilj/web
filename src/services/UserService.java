@@ -1,6 +1,9 @@
 package services;
 
+import java.io.InputStream;
+
 import javax.inject.Singleton;
+import javax.servlet.ServletContext;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
@@ -13,6 +16,7 @@ import javax.ws.rs.core.HttpHeaders;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
+import org.glassfish.jersey.media.multipart.FormDataParam;
 import org.json.simple.JSONObject;
 
 import dao.UserDAO;
@@ -23,8 +27,9 @@ import model.User;
 public class UserService {
 
 	private UserDAO dao;
+	@Context ServletContext ctx;
 	
-	public UserService(){
+	public UserService(){		
 		dao = new UserDAO();
 	}
 		
@@ -46,6 +51,19 @@ public class UserService {
 			return Response.ok().build();
 		}
 		return Response.status(Response.Status.INTERNAL_SERVER_ERROR).build();
+	}
+	
+	
+	@POST
+	@Path("/upload")
+	@Consumes(MediaType.MULTIPART_FORM_DATA)
+	public Response upload(@FormDataParam("username") String username,@FormDataParam("file") InputStream file){
+				
+		if(dao.uploadPicture(username,file,ctx.getRealPath("images/"))) {
+				return Response.ok().build();			
+		}
+			
+		return Response.status(Response.Status.CONFLICT).build();		
 	}
 	
 	@POST

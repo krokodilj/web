@@ -4,7 +4,7 @@
 		<div class="col-md-4">
 			<div ng-show="ctrl.step==1">
 				<form name="registerForm">
-					<h1>Register</h1>
+					<center><h1>Register</h1></center>
 					<div class="form-group">
 						<center><label for="usr">Username:</label><center>
 						<input id="usr" type="text" class="form-control"  ng-change="ctrl.checkUsername()" ng-model="ctrl.username" required>
@@ -45,7 +45,9 @@
 
 				<h1>You have successfully registered</h1>
 				<h2>setup your avatar</h2>
-				<button class="btn btn-success" href="#/">Upload</button>
+				<img src="{{ctrl.n}}" width="200px" height="200px"/>
+				<input type="file" name="file" onchange="angular.element(this).scope().readFile(this)">
+				<button class="btn btn-success" ng-click="ctrl.upload()" >Upload</button>
 				<button class="btn btn-success" ng-click="ctrl.skip()">Skip</button>
 
 			</div>
