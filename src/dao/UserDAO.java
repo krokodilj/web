@@ -26,19 +26,13 @@ public class UserDAO {
 	public UserDAO(){
 		
 		mapper= new ObjectMapper();
-		
-		
-		file = new File("./data/users.json");
-
+		file= new File("data"+File.separator+"users.json");
 		try {		
-			if(file.exists()) users = mapper.readValue(file, Users.class);
-			else{
-				file.createNewFile();
-				saveData();
-				}
+			users = mapper.readValue(file, Users.class);			
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
+		
 	}
 	
 	public boolean isUsernameOk(String username){

@@ -22,20 +22,14 @@ public class SnippetDAO {
 	private List<String> languages=new ArrayList<String>();
 	public SnippetDAO(){
 		
-		mapper= new ObjectMapper();
+		mapper= new ObjectMapper();		
 		
-		File dir = new File("./data");
-		if (!dir.exists()) dir.mkdir();
-		
-		file = new File("./data/snippets.json");
-		file1 = new File("./data/languages.json");
+		file = new File("data"+File.separator+"snippets.json");
+		file1 = new File("data"+File.separator+"languages.json");
 		try {		
-			if(file.exists()) snippets = mapper.readValue(file, Snippets.class);
-			if(file1.exists()) languages = mapper.readValue(file1, List.class);
-			else{
-				file.createNewFile();
-				saveData();
-				}
+			 snippets = mapper.readValue(file, Snippets.class);
+			 languages = mapper.readValue(file1, List.class);
+			
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
