@@ -1,0 +1,76 @@
+<div class="container-fluid">
+	<div class="row">
+		<div class="col-md-3"></div>
+		<div class="col-md-6">
+			<center><h1>Search</h1></center>
+			<center><input type="text" style="width:100%;"  ng-model="ctrl.query">
+			<button class="btn btn-primary" ng-click="ctrl.search()">Search</button></center>
+			
+		</div>
+		<div class="col-md-3"></div>
+	</div>
+	<hr>
+	<div class="row">		
+		<div class="col-md-3">
+			<!-- search params -->
+			<h3>snippet search params</h3>
+			 <div class="form-group" >
+			    <center><label for="language">Language:</label>	    	
+			    <select id="language" ng-model="ctrl.lang">
+			    	<option value="{{ctrl.null}}">all</option>
+			    	<option ng-repeat="l in ctrl.languages" ng-value="l">{{l}}</option>
+				</select>
+				</center>		
+			</div>
+			<div class="form-group" >
+			    <center><label for="startdate">From Date:</label>		    	
+			    <input type="date" id="startdate" ng-model="ctrl.start_date"/>
+			</div>
+			</center>		
+			<div class="form-group" >
+			    <center><label for="enddate">To Date:</label>		    	
+			    <input type="date" id="enddate" ng-model="ctrl.end_date"/>
+			    	</center>	
+			</div>			
+			
+			
+
+		</div>
+
+		<div class="col-md-6">
+			<!-- search results-->
+			<div class="tab-container">
+    			<ul class="nav nav-tabs">
+      				<li class="active"><a data-target="#snippets" data-toggle="tab">snippets</a></li>
+				    <li><a data-target="#users" data-toggle="tab" ng-show="role!='user'">users</a></li>
+				</ul>
+				<div class="tab-content">
+
+					<!-- snippets-->
+					<div class="tab-pane active cont" id="snippets">
+						<div ng-repeat="c in ctrl.snippets">
+								<li class="list-group-item clearfix" >
+									<a href="#/snippet/{{c.id}}">{{c.desc}}</a>									
+									<span class="pull-right button-group">
+										<span class="badge">{{c.language}}</span>
+									</span>
+								</li>
+								
+								</div>
+					</div>
+
+					<!-- users -->
+					<div class="tab-pane cont" id="users">
+						<div ng-repeat="u in ctrl.users">
+							<li class="list-group-item clearfix" >
+									<a href="#/profile/{{u.username}}">{{u.username}}</a>									
+									
+							</li>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="col-md-3"></div>
+	</div>
+</div>

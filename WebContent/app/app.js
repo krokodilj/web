@@ -5,7 +5,14 @@
 		.config(function($routeProvider){
 				$routeProvider
 					.when("/",{
-						
+						templateUrl:"app/views/search.html",
+						controller:"searchController",
+						controllerAs:"ctrl",
+						resolve:{
+							"permission":function(permissionService){
+								permissionService.givePermission(['user','ruser','admin']);
+							}
+						}
 						
 					})
 					.when("/login",{

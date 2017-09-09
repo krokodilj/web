@@ -10,6 +10,7 @@ import javax.ws.rs.PUT;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
+import javax.ws.rs.QueryParam;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
@@ -18,6 +19,7 @@ import org.json.simple.JSONObject;
 import dao.SnippetDAO;
 import model.Comment;
 import model.Snippet;
+import util.DateQuery;
 
 @Path("/snippets")
 public class SnippetService {
@@ -56,6 +58,19 @@ public class SnippetService {
 		
 		List<Snippet> s=dao.getByOwner(username);
 		
+		return Response.ok().entity(s).build();
+		
+	}
+	
+	@GET
+	@Path("/search")
+	@Produces(MediaType.APPLICATION_JSON)
+	public Response search(	@QueryParam("desc") String desc,
+							@QueryParam("language") String language,
+							@QueryParam("start") Long start,
+							@QueryParam("end") Long end){
+		
+		List<Snippet> s =dao.search(desc,language,start,end);
 		return Response.ok().entity(s).build();
 		
 	}

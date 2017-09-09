@@ -72,7 +72,15 @@
 				return ret
 			}
 
+			self.search=function(query){
+				query= query=="" ? undefined:query
 
+				var ret= $http.get("api/users/by_username/"+query).then(
+					function(response){
+						return response.data
+					})
+				return ret
+			}
 
 		})
 })();

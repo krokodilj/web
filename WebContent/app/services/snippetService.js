@@ -75,12 +75,30 @@
 
 			self.unlockSnippet=function(id){
 				var ret = $http.put("api/snippets/"+id).then(
-				function(response){
-					return true
-				},function(error){
-					return false
-				})
+					function(response){
+						return true
+					},function(error){
+						return false
+					})
 
+				return ret
+			}
+
+
+			self.search=function(q,l,sd,ed){
+				var query=""
+				if(q||l||sd||ed){
+					query=query+"?"
+					if(q) query=query+"desc="+q+"&"
+					if(l) query=query+"language="+l+"&"
+					if(sd) query=query+"start="+sd+"&"
+					if(ed) query=query+"end="+ed+"&"
+					
+				}
+				var ret= $http.get("api/snippets/search"+query).then(
+					function(response){
+						return response.data
+					})
 				return ret
 			}
 

@@ -6,11 +6,14 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
+import java.util.ArrayList;
+import java.util.List;
 
 import org.json.simple.JSONObject;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 
+import model.Snippet;
 import model.User;
 import model.Users;
 
@@ -122,6 +125,16 @@ public class UserDAO {
 		User u = users.data.get(username).copy();	
 		u.setPassword(null);
 		return u;
+	}
+	
+	public List<User> getByUsername(String query){
+		List<User> ls=new ArrayList<User>();
+				
+		for(User s:users.data.values()){
+			if(s.getUsername().contains(query)||(query.equals("undefined"))) ls.add(s);
+		}
+		return ls;
+		
 	}
 	
 	public boolean blockUser(String id){

@@ -1,6 +1,7 @@
 package services;
 
 import java.io.InputStream;
+import java.util.List;
 
 import javax.inject.Singleton;
 import javax.servlet.ServletContext;
@@ -20,6 +21,7 @@ import org.glassfish.jersey.media.multipart.FormDataParam;
 import org.json.simple.JSONObject;
 
 import dao.UserDAO;
+import model.Snippet;
 import model.User;
 
 @Singleton
@@ -92,6 +94,16 @@ public class UserService {
 			return Response.ok().entity(u).build();
 		}
 		return Response.status(Response.Status.NOT_FOUND).build();
+	}
+	
+	@GET
+	@Path("/by_username/{query}")
+	@Produces(MediaType.APPLICATION_JSON)
+	public Response getByDesc(@PathParam("query") String query){
+		
+		List<User> s =dao.getByUsername(query);
+		return Response.ok().entity(s).build();
+		
 	}
 	
 	@PUT

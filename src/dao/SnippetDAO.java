@@ -70,6 +70,55 @@ public class SnippetDAO {
 		
 	}
 	
+	public List<Snippet> search(String desc,String language,Long s , Long e){
+		
+		List<Snippet> in;
+		List<Snippet> result= new ArrayList<Snippet>();
+		for(Snippet ss:snippets.data.values()) result.add(ss);
+		
+		if(desc!=null){
+			in=copyList(result);
+			result.clear();
+			for(Snippet snippet:in){
+				if(snippet.getDesc().contains(desc))
+					result.add(snippet);
+			}
+			
+		}
+		
+		if(language!=null){
+			in=copyList(result);
+			result.clear();
+			for(Snippet snippet:in){
+				if(snippet.getLanguage().equals(language))
+					result.add(snippet);
+			}
+		}
+		
+		if(s!=null){
+			Date start=new Date(s);
+			in=copyList(result);
+			result.clear();
+			for(Snippet snippet:in){
+				if(start.before(snippet.getDate()))
+					result.add(snippet);
+			}
+			
+		}
+		
+		if(e!=null){
+			Date end=new Date(e);
+			in=copyList(result);
+			result.clear();
+			for(Snippet snippet:in){
+				if(end.after(snippet.getDate()))
+					result.add(snippet);
+			}
+		}
+		
+		return result;
+	}
+	
 	public List<String> getLanguages(){
 		return languages;
 	}
@@ -170,6 +219,14 @@ public class SnippetDAO {
 		} catch (Exception e) {
 			e.printStackTrace();
 		} 
+	}
+	
+	private List<Snippet> copyList(List<Snippet> in){
+		List<Snippet> result=new ArrayList<Snippet>();
+		
+		for(Snippet s:in) result.add(s);
+		
+		return result;
 	}
 	
 }
