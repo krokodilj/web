@@ -1,7 +1,7 @@
 (function (){
 
 	angular.module("snippets")
-		.controller("snippetController",function($routeParams,snippetService,commentService){
+		.controller("snippetController",function($location,$routeParams,snippetService,commentService){
 
 			var self = this
 
@@ -25,6 +25,17 @@
 				snippetService.unlockSnippet($routeParams.id).then(function(retval){
 					if(!retval) { alert("unlock snippet ERROR") }
 					else{ self.getSnippet()}
+				})
+			}
+
+			self.deleteSnippet=function(){
+				if (confirm("Delete it????"))
+					snippetService.deleteSnippet($routeParams.id).then(function (retval){
+						if(!retval) {alert("delete snippet error")}
+						else{
+							$location.path("#/")
+						}
+					
 				})
 			}
 

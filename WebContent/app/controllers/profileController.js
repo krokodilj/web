@@ -29,7 +29,7 @@
 
 			self.addLanguage=function(){
 				languageService.addLanguage(self.language).then(function(retval){
-					if(!retval){	self.error=true	}
+					if(!retval){	alert("Already defined")	}
 					else{	self.getLanguages()	}
 				})
 			}

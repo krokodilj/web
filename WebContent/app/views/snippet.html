@@ -13,6 +13,7 @@
 			<hr>
 			<button class="btn btn-success"  ng-click="ctrl.lockSnippet()" ng-show="role=='admin' && !ctrl.snippet.locked" >LOCK</button>			
 			<button class="btn btn-success"  ng-click="ctrl.unlockSnippet()" ng-show="role=='admin' && ctrl.snippet.locked" >UNLOCK</button>
+			<button class="btn btn-danger" 	 ng-click="ctrl.deleteSnippet()"  ng-show="role=='admin'">DELETE</button>
 			<span class="badge" ng-show="ctrl.snippet.locked">LOCKED</span>
 		</div>
 

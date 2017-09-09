@@ -27,7 +27,6 @@
 			}
 
 			self.addSnippet=function(cd,dc,url,lg,min){
-
 				name=authService.getUserName()
 
 			
