@@ -15,6 +15,7 @@ import javax.ws.rs.ext.Provider;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 import model.Snippets;
+import model.User;
 import model.Users;
 
 @Provider
@@ -52,8 +53,12 @@ public class Loader implements ServletContextListener {
 				
 				//add admins
 				Users users= new Users();			
-				
-				
+				System.out.println("creating admin users ");
+				User admin1= new User("admin","admin","admin@snippets","admin","Admin","admin",null,null,false,"images/guest.png");
+
+				User admin2= new User("cone","c","cone_admin@snippets","admin","cone","cone",null,null,false,"images/guest.png");
+				users.data.put(admin1.getUsername(), admin1);
+				users.data.put(admin2.getUsername(), admin2);
 				mapper.writeValue(usrsfile, users);
 			
 			}catch(Exception e){

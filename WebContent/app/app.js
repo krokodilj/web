@@ -88,6 +88,11 @@
 			    return filtered;
 			}
    		})
+   		.filter("date", function() {
+        	return function(longdate) {
+	            return new Date(longdate).toString().slice(0,24);
+			}
+   		})
 		
 })();
 
