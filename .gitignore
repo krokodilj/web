@@ -1,6 +1,3 @@
 /build/
-.classpath
-.project
 web.iml
 .idea
-.settings
