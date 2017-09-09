@@ -12,17 +12,14 @@
 			self.getUser=function(){
 
 				userService.getUser($routeParams.username).then(function(retval){
-					self.user=retval					
-				})
-			}
-
-			self.getSnippets=function(){
-
-				snippetService.getByOwner($routeParams.username).then(function(retval){
+					self.user=retval	
+					snippetService.getByOwner(self.user.username).then(function(retval){
 					self.snippets=retval
 					
+					})				
 				})
 			}
+
 
 			self.getLanguages=function(){
 				languageService.getLanguages().then(function(retval){
@@ -57,7 +54,6 @@
 
 			self.getUser();
 
-			self.getSnippets();
 
 		})
 
