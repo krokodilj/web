@@ -10,6 +10,7 @@
 			<div style="height:150px;">  {{ctrl.snippet.desc}}</div>
 			Url: <a  target="_blank" href="http://{{ctrl.snippet.url}}">{{ctrl.snippet.url}}</a>
 			<p>Owner:<a  href="#/profile/{{ctrl.snippet.owner}}" > {{ctrl.snippet.owner}}</a></p>
+			<p>Created: {{ctrl.date}}</a></p>
 			<hr>
 			<button class="btn btn-success"  ng-click="ctrl.lockSnippet()" ng-show="role=='admin' && !ctrl.snippet.locked" >LOCK</button>			
 			<button class="btn btn-success"  ng-click="ctrl.unlockSnippet()" ng-show="role=='admin' && ctrl.snippet.locked" >UNLOCK</button>
@@ -56,9 +57,10 @@
 						</div>
 					</div>
 				</form>
-
+				<center><button ng-click="ctrl.filter='date'">most recent</button>
+				<button ng-click="ctrl.filter='positive'">top scored</button></center>
 				<!-- comments -->
-				<div ng-repeat="c in ctrl.snippet.comments">
+				<div ng-repeat="c in ctrl.snippet.comments | orderBy:ctrl.filter">
 					<div class="row">
 						<div class="col-md-3">
 							<img

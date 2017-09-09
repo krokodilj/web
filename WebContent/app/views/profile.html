@@ -1,3 +1,4 @@
+
 <div class='container-fluid'>
 	<div class="row">
 		<div class="col-md-2"></div>
@@ -6,6 +7,9 @@
 			<h3>{{ctrl.user.username}}</h3>
 			<h5>{{ctrl.user.email}}</h5>
 			<button class="btn btn-success"  ng-click="ctrl.blockUser()" ng-show="role=='admin' && !ctrl.user.blocked && ctrl.user.role!='admin'" >BLOCK</button>
+			<div id="map" style="width:300px;height: 200px;background-color: gray;">
+
+			</div>
 			<span class="badge" ng-show="ctrl.user.blocked">BLOCKED</span>
 					
 		</div>

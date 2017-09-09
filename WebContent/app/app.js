@@ -70,6 +70,24 @@
 						redirectTo:"/"
 					})
 			})	
+		.filter("orderBy", function() {
+        	return function(items,field) {
+	            var filtered = [];
+	            angular.forEach(items,function(item) {
+			      filtered.push(item);
+			    });
+	            if(field=="date")
+				    filtered.sort(function (a, b) {
+				      return (a[field] < b[field] ? 1 : -1);
+				      });
+				if(field=="positive")
+					filtered.sort(function (a, b) {
+					      return (a.grade.positive < b.grade.positive ? 1 : -1);
+					     });					
+			    
+			    return filtered;
+			}
+   		})
 		
 })();
 

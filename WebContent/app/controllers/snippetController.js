@@ -7,10 +7,13 @@
 
 			self.snippet //has comment list and grades
 			self.text	
+			self.filter='id'
 
 			self.getSnippet=function(){
 				snippetService.getSnippet($routeParams.id).then(function(retval){
 					self.snippet=retval
+					self.date= new Date(retval.date).toString().slice(0,24)
+					
 				})
 			}
 
